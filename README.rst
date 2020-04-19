@@ -10,7 +10,8 @@ Step
 * Set "sample.png" and push "send" button.
 * Download "fig.png".
 
-.. image:: https://www.dropbox.com/s/nfgfq3ahtntcnch/fig.png?dl=0
+.. image:: https://github.com/SaitoTsutomu/four_color
+   :scale: 200%
 
 Requirements
 ------------
