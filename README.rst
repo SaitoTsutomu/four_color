@@ -10,11 +10,11 @@ Step
 * Set "sample.png" and push "send" button.
 * Download "fig.png".
 
-.. image:: fig.png
+.. image:: https://www.dropbox.com/s/nfgfq3ahtntcnch/fig.png?dl=0
 
 Requirements
 ------------
-* Python 3, PIL, pulp
+* Python 3, Pillow, Flask, NetworkX, PuLP
 
 Features
 --------
