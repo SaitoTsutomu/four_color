@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "four_color"
-version = "0.0.5"
+version = "0.0.6"
 description = "`four_color` is a package for Four Color Problem."
 authors = ["SaitoTsutomu <tsutomu7@hotmail.co.jp>"]
 homepage = "https://github.com/SaitoTsutomu/four_color"

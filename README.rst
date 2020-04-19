@@ -1,9 +1,6 @@
 `four_color` is a package for Four Color Problem.
 ::
 
-Step
-----
-
 * Download picture from https://www.dropbox.com/s/twiscp9h15so8no/sample.png?dl=1
 * `python -m four_color`
 * Open http://localhost:8000/
