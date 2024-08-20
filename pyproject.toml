@@ -12,21 +12,18 @@ homepage = "https://github.com/SaitoTsutomu/four_color"
 license = "Apache-2.0"
 name = "four_color"
 readme = "README.rst"
-version = "0.2.1"
+version = "0.3.0"
 
 [tool.poetry.dependencies]
 flask = "^3.0"
-networkx = "^3.2"
-pillow = "^10.2"
-pulp = "^2.8"
-python = "^3.11"
+networkx = "^3.3"
+pillow = "^10.4"
+pulp = "^2.9"
+python = "^3.12"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.12"
-flake8 = "^7.0"
-isort = "^5.13"
-mypy = "^1.8"
-pytest = "^7.4"
+mypy = "^1.11"
+pytest = "^8.3"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"

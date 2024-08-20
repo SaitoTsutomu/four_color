@@ -3,15 +3,15 @@ from itertools import product
 from PIL import Image, ImageDraw
 
 # see pyproject.toml
-__version__ = "0.0.6"
+__version__ = "0.3.0"
 __author__ = "Saito Tsutomu <tsutomu7@hotmail.co.jp>"
 
 
 def load_image(src, times=1):
     """画像ファイルの読込み"""
-    from urllib.request import urlopen
     from collections import Counter
     from random import seed, shuffle
+    from urllib.request import urlopen
 
     with urlopen(src) if src.startswith("http") else open(src, "rb") as fd:
         im = Image.open(fd).convert("RGB")
@@ -64,14 +64,12 @@ def make_graph(im):
 
 def solve_four_color(im, g):
     """4色問題を解く"""
-    from pulp import LpProblem, LpVariable, LpBinary, lpSum, lpDot, value
+    from pulp import LpBinary, LpProblem, LpVariable, lpDot, lpSum, value
 
     r4 = range(4)
     m = LpProblem()  # 数理モデル
     # エリアiを色jにするかどうか
-    v = {
-        i: [LpVariable("v%d_%d" % (i, j), cat=LpBinary) for j in r4] for i in g.nodes()
-    }
+    v = {i: [LpVariable("v%d_%d" % (i, j), cat=LpBinary) for j in r4] for i in g.nodes()}
     for i in g.nodes():
         m += lpSum(v[i]) == 1
     for i, j in g.edges():
