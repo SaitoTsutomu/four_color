@@ -7,7 +7,7 @@ if typing.TYPE_CHECKING:
     import networkx as nx
 
 # see pyproject.toml
-__version__ = "0.4.0"
+__version__ = "0.4.2"
 __author__ = "Saito Tsutomu <tsutomu7@hotmail.co.jp>"
 
 

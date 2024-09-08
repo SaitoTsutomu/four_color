@@ -6,7 +6,8 @@
 * Set "sample.png" and push "send" button.
 * Download "fig.png".
 
-![](images/fig.gif)
+<!-- Attention: Local paths are not displayed in PyPI! -->
+![](https://raw.githubusercontent.com/SaitoTsutomu/four_color/master/images/fig.gif)
 
 ## Requirements
 * Python 3, Pillow, Flask, NetworkX, PuLP
