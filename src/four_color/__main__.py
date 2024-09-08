@@ -3,7 +3,7 @@ from os import environ, path
 from flask import Flask, make_response, redirect, request
 from werkzeug.utils import secure_filename
 
-from . import load_image, make_graph, solve_four_color
+from . import load_image, make_graph, write_four_color
 
 app = Flask(__name__)
 
@@ -25,7 +25,7 @@ def root():
     f.save(fn)
     im = load_image(fn)
     g = make_graph(im)
-    solve_four_color(im, g)
+    write_four_color(im, g)
     im.save(fn)
     res = make_response()
     with open(fn, "rb") as fp:
@@ -36,8 +36,8 @@ def root():
 
 
 HOST = environ.get("SERVER_HOST", "localhost")
-PORT = environ.get("SERVER_PORT", "")
-PORT = int(PORT) if PORT.isdigit() else 8000
+_PORT = environ.get("SERVER_PORT", "")
+PORT = int(_PORT) if _PORT.isdigit() else 8000
 app.config["MAX_CONTENT_LENGTH"] = 210000
 app.debug = True
 app.run(HOST, PORT)
