@@ -1,26 +1,20 @@
-import typing
+from collections import Counter
 from itertools import product
+from random import seed, shuffle
+from urllib.request import urlopen
 
+import networkx as nx
 from PIL import Image, ImageDraw
-
-if typing.TYPE_CHECKING:
-    import networkx as nx
-
-# see pyproject.toml
-__version__ = "0.4.2"
-__author__ = "Saito Tsutomu <tsutomu7@hotmail.co.jp>"
+from pulp import LpBinary, LpProblem, LpVariable, lpDot, lpSum, value
 
 
 def load_image(src: str, times: int = 1) -> Image.Image:
     """画像ファイルの読込み"""
-    from collections import Counter
-    from random import seed, shuffle
-    from urllib.request import urlopen
 
-    with urlopen(src) if src.startswith("http") else open(src, "rb") as fd:
+    with urlopen(src) if src.startswith("http") else open(src, "rb") as fd:  # noqa: PTH123
         im = Image.open(fd).convert("RGB")
     # 代表色(最も使用頻度の多い色)を抽出
-    cc = sorted([(v, k) for k, v in Counter(im.getdata()).items()])[-1][1]
+    cc = max((v, k) for k, v in Counter(im.getdata()).items())[1]
     # RGB=(0,1,?)の色をなくす
     for y, x in product(range(im.height), range(im.width)):
         r, g, b = im.getpixel((x, y))[:3]
@@ -50,7 +44,6 @@ def load_image(src: str, times: int = 1) -> Image.Image:
 
 def make_graph(im: Image.Image):
     """グラフ作成"""
-    import networkx as nx
 
     g = nx.Graph()
     for y, x in product(range(im.height - 1), range(im.width - 1)):
@@ -68,7 +61,6 @@ def make_graph(im: Image.Image):
 
 def solve_four_color(g: "nx.Graph"):
     """4色問題を解く"""
-    from pulp import LpBinary, LpProblem, LpVariable, lpDot, lpSum, value
 
     r4 = range(4)
     m = LpProblem()  # 数理モデル

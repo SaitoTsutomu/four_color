@@ -1,4 +1,5 @@
-from os import environ, path
+from os import environ
+from pathlib import Path
 
 from flask import Flask, make_response, redirect, request
 from werkzeug.utils import secure_filename
@@ -17,19 +18,19 @@ def root():
             "<input type='submit' value='send'></from>"
         )
     f = request.files["im"]
-    fn = secure_filename(f.filename) if f else ""
-    ext = path.splitext(fn)[1]
-    if not fn or not ext.endswith(("png", "gif", "jgp", "jpeg")):
+    if not f:
         return redirect("/")
-    fn = "fig" + ext
-    f.save(fn)
-    im = load_image(fn)
+    ext = Path(secure_filename(f.filename)).suffix
+    if not ext.endswith(("png", "gif", "jgp", "jpeg")):
+        return redirect("/")
+    fig_file = Path("fig" + ext)
+    f.save(fig_file)
+    im = load_image(str(fig_file))
     g = make_graph(im)
     write_four_color(im, g)
-    im.save(fn)
+    im.save(fig_file)
     res = make_response()
-    with open(fn, "rb") as fp:
-        res.data = fp.read()
+    res.data = fig_file.read_bytes()
     res.headers["Content-Type"] = "application/octet-stream"
     res.headers["Content-Disposition"] = "attachment; filename=fig" + ext
     return res
