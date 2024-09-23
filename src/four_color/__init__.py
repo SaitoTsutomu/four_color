@@ -1,4 +1,5 @@
 from collections import Counter
+from importlib.metadata import metadata
 from itertools import product
 from random import seed, shuffle
 from urllib.request import urlopen
@@ -6,6 +7,10 @@ from urllib.request import urlopen
 import networkx as nx
 from PIL import Image, ImageDraw
 from pulp import LpBinary, LpProblem, LpVariable, lpDot, lpSum, value
+
+_package_metadata = metadata(__package__)
+__version__ = _package_metadata["Version"]
+__author__ = _package_metadata.get("Author-email", "")
 
 
 def load_image(src: str, times: int = 1) -> Image.Image:
