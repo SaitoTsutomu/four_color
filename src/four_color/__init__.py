@@ -16,7 +16,7 @@ __author__ = _package_metadata.get("Author-email", "")
 def load_image(src: str, times: int = 1) -> Image.Image:
     """画像ファイルの読込み"""
 
-    with urlopen(src) if src.startswith("http") else open(src, "rb") as fd:  # noqa: PTH123
+    with urlopen(src) if src.startswith("http") else open(src, "rb") as fd:  # noqa: PTH123 S310
         im = Image.open(fd).convert("RGB")
     # 代表色(最も使用頻度の多い色)を抽出
     cc = max((v, k) for k, v in Counter(im.getdata()).items())[1]
